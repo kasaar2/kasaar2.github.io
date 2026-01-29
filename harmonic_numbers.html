@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmonic Numbers Are Never Integers</title>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.7;
+            color: #333;
+            background-color: #fafafa;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #222;
+        }
+        h2 {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        .definition {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .proof-step {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+        }
+        .proof-step strong {
+            color: #2c3e50;
+        }
+        .example {
+            background-color: #fef9e7;
+            border-left: 4px solid #f1c40f;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .qed {
+            text-align: right;
+            font-size: 1.2rem;
+        }
+        a {
+            color: #2980b9;
+        }
+        .fraction-table {
+            margin: 1.5rem auto;
+            text-align: center;
+        }
+        ul {
+            margin: 0.5rem 0 1rem 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .note {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Harmonic Numbers Are Never Integers (Except $H_1$)</h1>
+
+    <p>This note is about the fascinating mathematical objects called <strong>harmonic numbers</strong>, defined as:</p>
+
+    <div class="definition">
+        $$H_n = \sum_{k=1}^{n} \frac{1}{k} = 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n}$$
+        <p class="note">(The $\sum$ notation is shorthand for "sum up all the terms," where $k$ runs from 1 to $n$.)</p>
+    </div>
+
+    <p>Here are the first few harmonic numbers:</p>
+    <ul>
+        <li>$H_1 = 1 = 1.000$</li>
+        <li>$H_2 = 1 + \frac{1}{2} = \frac{3}{2} = 1.500$</li>
+        <li>$H_3 = 1 + \frac{1}{2} + \frac{1}{3} = \frac{11}{6} \approx 1.833$</li>
+        <li>$H_4 = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} = \frac{25}{12} \approx 2.083$</li>
+    </ul>
+
+    <p>These numbers have been recognized for a long time. In fact, already in the 14th century, the French philosopher <strong>Nicole Oresme (c. 1323–1382)</strong> provided <a href="https://en.wikipedia.org/wiki/Harmonic_series_(mathematics)#:~:text=The%20divergence%20of%20the%20harmonic,in%20Johann%20Bernoulli's%20collected%20works.">the first proof</a> that the harmonic numbers grow arbitrarily large. His elegant argument groups terms to show the sum exceeds any bound:</p>
+
+    $$1 + \frac{1}{2} + \left(\frac{1}{3} + \frac{1}{4}\right) + \left(\frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8}\right) + \cdots > 1 + \frac{1}{2} + \frac{1}{2} + \frac{1}{2} + \cdots$$
+
+    <p>Why does each group sum to at least $\frac{1}{2}$? Because we can replace each term with the smallest term in its group: $\frac{1}{3} + \frac{1}{4} > \frac{1}{4} + \frac{1}{4} = \frac{1}{2}$, and $\frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8} > \frac{1}{8} + \frac{1}{8} + \frac{1}{8} + \frac{1}{8} = \frac{1}{2}$, and so on.</p>
+
+    <p>In light of this property, a question arises: are there any harmonic numbers that are integers (whole numbers), besides the trivial case $H_1 = 1$?</p>
+
+    <p>In this note we give the standard proof showing that <strong>the answer is no</strong>.</p>
+
+    <h2>Spotting the Pattern</h2>
+
+    <p>Before we dive into the proof, take a look at the harmonic numbers $H_2$ through $H_{10}$ and see if you can spot a pattern:</p>
+
+    <div class="fraction-table">
+        $$\begin{align*}
+        H_2 &= \frac{3}{2} & H_3 &= \frac{11}{6} & H_4 &= \frac{25}{12} \\[1em]
+        H_5 &= \frac{137}{60} & H_6 &= \frac{49}{20} & H_7 &= \frac{363}{140} \\[1em]
+        H_8 &= \frac{761}{280} & H_9 &= \frac{7129}{2520} & H_{10} &= \frac{7381}{2520}
+        \end{align*}$$
+    </div>
+
+    <p>Notice anything when comparing the numerator to the denominator?</p>
+
+    <p style="text-align: center; font-size: 1.5rem; margin: 1.5rem 0;">⋮</p>
+
+    <p>Indeed, the numerator always seems to be <strong>odd</strong>, whereas the denominator always seems to be <strong>even</strong>. Such fractions can never be integers. We'll show that this pattern holds for all $n > 1$.</p>
+
+    <h2>The Proof</h2>
+
+    <p>Let $2^k$ be the largest power of 2 such that $2^k \leq n < 2^{k+1}$.</p>
+
+    <div class="proof-step">
+        <strong>Step 1:</strong> Write $H_n$ as a single fraction.
+        $$H_n = \frac{1}{L} \left( \sum_{i=1}^{n} \frac{L}{i} \right) = \frac{A}{L}$$
+        <p>where $L$ is the least common multiple (LCM) of $1, 2, \ldots, n$—that is, the smallest positive integer divisible by all of $1, 2, \ldots, n$—and $A = \sum_{i=1}^{n} \frac{L}{i}$.</p>
+        <p class="note">(Note that $A$ is indeed an integer: since $L$ is divisible by each $i$, every term $\frac{L}{i}$ is an integer, and so is their sum.)</p>
+    </div>
+
+    <div class="proof-step">
+        <strong>Step 2:</strong> Identify the power of 2 in $L$.
+        <p>Since $2^k \leq n$, the denominator $L$ must include $2^k$ as a factor. In fact, $2^k$ is the <em>highest</em> power of 2 that divides $L$, because $2^{k+1} > n$ and therefore $2^{k+1}$ is not among the numbers $1, 2, \ldots, n$.</p>
+    </div>
+
+    <div class="proof-step">
+        <strong>Step 3:</strong> Determine the parity of each term $\frac{L}{i}$.
+        <p>For each $i$ from $1$ to $n$, consider $\frac{L}{i}$:</p>
+        <ul>
+            <li><strong>If $i = 2^k$:</strong> Then $\frac{L}{2^k}$ has <em>all</em> factors of 2 removed (since $2^k$ is the highest power of 2 in $L$), making it <strong>odd</strong>.</li>
+            <li><strong>If $i \neq 2^k$:</strong> Then either $i$ is odd, or $i$ is even but contains fewer factors of 2 than $2^k$ does. (Why can't $i$ contain $k$ or more factors of 2? Because the only multiple of $2^k$ in the range $\{1, \ldots, n\}$ is $2^k$ itself—the next multiple would be $2 \cdot 2^k = 2^{k+1}$, which exceeds $n$.) In either case, when we compute $\frac{L}{i}$, at least one factor of 2 remains, making $\frac{L}{i}$ <strong>even</strong>.</li>
+        </ul>
+    </div>
+
+    <div class="proof-step">
+        <strong>Step 4:</strong> Conclude that $A$ is odd.
+        <p>The numerator $A$ is a sum of:</p>
+        <ul>
+            <li>One odd term (from $i = 2^k$)</li>
+            <li>All other terms are even</li>
+        </ul>
+        <p>Therefore: $A = \text{odd} + \text{even} + \cdots + \text{even} = \text{odd}$</p>
+    </div>
+
+    <div class="proof-step">
+        <strong>Step 5:</strong> Conclude that $H_n$ is not an integer.
+        <ul>
+            <li>Numerator $A$ is odd</li>
+            <li>Denominator $L$ is even (it has factor $2^k$ with $k \geq 1$)</li>
+        </ul>
+        <p>For $\frac{A}{L}$ to be an integer, $L$ would have to divide $A$. But if an even number divides $A$, then $A$ must be even—contradiction. Therefore $H_n$ is not an integer.</p>
+        <p class="qed">$\square$</p>
+    </div>
+
+    <h2>Concrete Example: $H_7$</h2>
+
+    <div class="example">
+        <p>Let's trace through the proof with $n = 7$. Here $2^k = 4$ (since $4 \leq 7 < 8$), so $k = 2$.</p>
+        <p>The LCM of $1, 2, 3, 4, 5, 6, 7$ is $L = 420$.</p>
+        <p>Now compute each $\frac{L}{i}$:</p>
+        <ul>
+            <li>$\frac{420}{1} = 420$ (even)</li>
+            <li>$\frac{420}{2} = 210$ (even)</li>
+            <li>$\frac{420}{3} = 140$ (even)</li>
+            <li>$\frac{420}{4} = 105$ (odd) $\leftarrow$ this is the $i = 2^k$ term</li>
+            <li>$\frac{420}{5} = 84$ (even)</li>
+            <li>$\frac{420}{6} = 70$ (even)</li>
+            <li>$\frac{420}{7} = 60$ (even)</li>
+        </ul>
+        <p>So $A = 420 + 210 + 140 + 105 + 84 + 70 + 60 = 1089$ (odd), and $H_7 = \frac{1089}{420} = \frac{363}{140}$, which is not an integer.</p>
+    </div>
+
+</body>
+</html>
